@@ -94,6 +94,7 @@ uv run uvicorn turtle_agent.server:app --host 0.0.0.0 --port 8000 --reload
 
 - 이미지 전처리 tool (크롭/리사이즈)
 - 신뢰도 기반 재분석 tool
+- TODO: DB 로직이 늘어나면 (이력 조회, 통계 등) `tools.py`에서 `db.py`로 분리
 
 ## 시스템 프롬프트 설계 방향
 
