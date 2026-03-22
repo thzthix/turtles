@@ -7,3 +7,5 @@ build/
 .env
 *.log
 .pytest_cache/
+.claude/
+uv.lock

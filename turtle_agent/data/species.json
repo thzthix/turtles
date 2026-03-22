@@ -1,0 +1,87 @@
+{
+  "붉은귀거북": {
+    "scientific_name": "Trachemys scripta elegans",
+    "common_name_en": "Red-eared Slider",
+    "habitat": "북미 원산, 한국 전역 하천·저수지에 귀화",
+    "lifespan_years": "20~40년",
+    "max_shell_length_cm": 30,
+    "appearance": {
+      "shell": "올리브~갈색 등갑에 노란 줄무늬, 성체는 색이 어두워짐",
+      "head": "눈 뒤에 뚜렷한 붉은색(또는 주황색) 반점이 최대 식별 포인트",
+      "belly": "노란 배갑에 짙은 반점 패턴"
+    },
+    "gender_traits": {
+      "male": "앞발 발톱이 길고 굵음, 꼬리가 길고 두꺼움, 배갑이 약간 오목",
+      "female": "앞발 발톱이 짧음, 꼬리가 짧고 가늘음, 배갑이 편평하거나 볼록"
+    },
+    "notes": "국내 생태계교란종으로 지정. 가장 흔한 애완 거북이 종"
+  },
+  "페닌슐라쿠터": {
+    "scientific_name": "Pseudemys peninsularis",
+    "common_name_en": "Peninsula Cooter",
+    "habitat": "미국 플로리다 반도 담수 환경",
+    "lifespan_years": "20~30년",
+    "max_shell_length_cm": 40,
+    "appearance": {
+      "shell": "짙은 갈색~검은색 등갑에 노란~주황 줄무늬 패턴",
+      "head": "노란 줄무늬가 머리와 목에 다수, 귀 뒤 붉은 반점 없음 (붉은귀거북과 구분 핵심)",
+      "belly": "주황~노란 배갑, 어두운 패턴이 적음"
+    },
+    "gender_traits": {
+      "male": "앞발 발톱이 길고 곧음, 꼬리가 길고 두꺼움",
+      "female": "앞발 발톱이 짧고 굽음, 체구가 더 큼"
+    },
+    "notes": "붉은귀거북과 체형이 비슷하지만 머리 줄무늬 패턴과 귀 반점 유무로 구분"
+  },
+  "보석거북": {
+    "scientific_name": "Rhinoclemmys pulcherrima",
+    "common_name_en": "Painted Wood Turtle",
+    "habitat": "중미(멕시코~코스타리카) 열대/아열대 산림",
+    "lifespan_years": "15~25년",
+    "max_shell_length_cm": 20,
+    "appearance": {
+      "shell": "등갑에 붉은색·노란색·검은색의 선명한 방사형 무늬 (보석처럼 화려함)",
+      "head": "붉은색과 노란색 줄무늬가 머리와 목에 선명",
+      "belly": "검은색 바탕에 노란 무늬"
+    },
+    "gender_traits": {
+      "male": "꼬리가 길고 두꺼움, 배갑이 약간 오목",
+      "female": "꼬리가 짧음, 배갑이 편평, 체구가 더 큼"
+    },
+    "notes": "반수생 거북으로 육지 활동도 많음. 등갑의 화려한 색상이 특징"
+  },
+  "옐로우밸리": {
+    "scientific_name": "Trachemys scripta scripta",
+    "common_name_en": "Yellow-bellied Slider",
+    "habitat": "미국 남동부 담수 환경",
+    "lifespan_years": "25~40년",
+    "max_shell_length_cm": 30,
+    "appearance": {
+      "shell": "올리브~갈색 등갑에 노란 줄무늬, 붉은귀거북과 유사",
+      "head": "눈 뒤에 큰 노란색 반점 (붉은색이 아닌 노란색이 핵심 차이)",
+      "belly": "선명한 노란색 배갑 (이름의 유래)"
+    },
+    "gender_traits": {
+      "male": "앞발 발톱이 길음, 꼬리가 길고 두꺼움, 성체는 멜라니즘으로 어두워짐",
+      "female": "앞발 발톱이 짧음, 꼬리가 짧고 가늘음, 체구가 더 큼"
+    },
+    "notes": "붉은귀거북의 아종 관계. 귀 반점 색상(노란색 vs 붉은색)으로 구분"
+  },
+  "핑크밸리": {
+    "scientific_name": "Emydura subglobosa",
+    "common_name_en": "Pink-bellied Side-necked Turtle",
+    "habitat": "파푸아뉴기니, 호주 북부 하천",
+    "lifespan_years": "30~50년",
+    "max_shell_length_cm": 25,
+    "appearance": {
+      "shell": "짙은 회갈색~검은색의 매끈한 등갑, 무늬가 거의 없음",
+      "head": "회색 머리에 눈 뒤로 노란~흰색 줄무늬, 목을 옆으로 접는 사경목 거북",
+      "belly": "선명한 핑크색~산호색 배갑 (이름의 유래, 최대 식별 포인트)"
+    },
+    "gender_traits": {
+      "male": "꼬리가 길고 두꺼움, 체구가 약간 작음",
+      "female": "꼬리가 짧음, 체구가 더 큼, 배갑 핑크색이 더 선명한 경향"
+    },
+    "notes": "사경목(Side-necked) 거북으로 목을 옆으로 접어 등갑에 넣음. 다른 4종과 과(Family)가 다름"
+  }
+}
