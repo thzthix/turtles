@@ -67,20 +67,27 @@ SYSTEM_PROMPT = """
 6. distinguishing_features에는 이 종으로 판별한 결정적 근거 2~5개를 구체적으로 기술한다 (예: "눈 뒤 붉은 반점 확인", "등갑 방사형 무늬 없음"). 일반적인 표현("초록색 등갑") 금지
 """.strip()
 
-turtle_agent = Agent(
-    MODEL,
-    output_type=TurtleAnalysisResult,
-    instructions=SYSTEM_PROMPT,
-    tools=[
-        Tool(lookup_species, description="거북이 도감에서 종 상세 정보를 조회한다"),
-        Tool(save_analysis, description="분석 결과를 DB에 저장하고 저장 ID를 반환한다"),
-    ],
-)
+def create_agent(model: str = MODEL) -> Agent[None, TurtleAnalysisResult]:
+    """거북이 판별 에이전트를 생성한다."""
+    return Agent(
+        model,
+        output_type=TurtleAnalysisResult,
+        instructions=SYSTEM_PROMPT,
+        tools=[
+            Tool(lookup_species, description="거북이 도감에서 종 상세 정보를 조회한다"),
+            Tool(save_analysis, description="분석 결과를 DB에 저장하고 저장 ID를 반환한다"),
+        ],
+    )
 
 
-async def analyze_turtle_image(image_data: bytes, media_type: str) -> TurtleAnalysisResult:
+async def analyze_turtle_image(
+    image_data: bytes,
+    media_type: str,
+    agent: Agent[None, TurtleAnalysisResult] | None = None,
+) -> TurtleAnalysisResult:
     """거북이 이미지를 분석하여 종류와 성별을 판별한다."""
-    result = await turtle_agent.run(
+    target_agent = agent or create_agent()
+    result = await target_agent.run(
         [
             "이 거북이의 종류와 성별을 판별해주세요.",
             BinaryContent(data=image_data, media_type=media_type),
