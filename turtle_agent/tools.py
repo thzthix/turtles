@@ -1,12 +1,11 @@
 import json
-import sqlite3
 import uuid
 from pathlib import Path
 
+from turtle_agent.db import DEFAULT_DB_PATH, get_connection, init_db
 from turtle_agent.exceptions import SaveFailedError, SpeciesNotFoundError
 
 SPECIES_DATA_PATH = Path(__file__).parent / "data" / "species.json"
-DEFAULT_DB_PATH = Path("turtle_analysis.db")
 
 
 def load_species_data() -> dict:
@@ -22,29 +21,6 @@ def lookup_species(species_name: str) -> dict:
     return data[species_name]
 
 
-def init_db(db_path: Path = DEFAULT_DB_PATH) -> None:
-    """분석 이력 테이블이 없으면 생성한다."""
-    conn = sqlite3.connect(str(db_path))
-    try:
-        conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS analysis_history (
-                id TEXT PRIMARY KEY,
-                species TEXT NOT NULL,
-                species_confidence REAL NOT NULL,
-                gender TEXT NOT NULL,
-                gender_confidence REAL NOT NULL,
-                distinguishing_features TEXT NOT NULL,
-                description TEXT NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-            """
-        )
-        conn.commit()
-    finally:
-        conn.close()
-
-
 def save_analysis(
     species: str,
     species_confidence: float,
@@ -58,7 +34,7 @@ def save_analysis(
     init_db(db_path)
     analysis_id = uuid.uuid4().hex[:12]
     try:
-        conn = sqlite3.connect(str(db_path))
+        conn = get_connection(db_path)
         try:
             conn.execute(
                 """

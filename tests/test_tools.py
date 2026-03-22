@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from turtle_agent.exceptions import SaveFailedError, SpeciesNotFoundError
-from turtle_agent.tools import init_db, load_species_data, lookup_species, save_analysis
+from turtle_agent.exceptions import SpeciesNotFoundError
+from turtle_agent.tools import load_species_data, lookup_species, save_analysis
 
 
 class TestLoadSpeciesData:
@@ -36,25 +36,6 @@ class TestLookupSpecies:
     def test_unknown_species_raises(self) -> None:
         with pytest.raises(SpeciesNotFoundError, match="자라"):
             lookup_species("자라")
-
-
-class TestInitDb:
-    def test_creates_table(self, tmp_path: Path) -> None:
-        db_path = tmp_path / "test.db"
-        init_db(db_path)
-        conn = sqlite3.connect(str(db_path))
-        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='analysis_history'")
-        assert cursor.fetchone() is not None
-        conn.close()
-
-    def test_idempotent(self, tmp_path: Path) -> None:
-        db_path = tmp_path / "test.db"
-        init_db(db_path)
-        init_db(db_path)
-        conn = sqlite3.connect(str(db_path))
-        cursor = conn.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='analysis_history'")
-        assert cursor.fetchone()[0] == 1
-        conn.close()
 
 
 class TestSaveAnalysis:

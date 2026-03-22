@@ -33,7 +33,8 @@ turtle_agent/
   __init__.py
   models.py        # Pydantic 응답/요청 모델만
   agent.py         # Pydantic AI 에이전트 정의만
-  tools.py         # 에이전트 tool 정의만
+  tools.py         # 에이전트 tool 함수만
+  db.py            # DB 초기화 + 커넥션 관리
   server.py        # FastAPI 라우팅만
   exceptions.py    # 커스텀 예외만
   data/
@@ -94,7 +95,7 @@ uv run uvicorn turtle_agent.server:app --host 0.0.0.0 --port 8000 --reload
 
 - 이미지 전처리 tool (크롭/리사이즈)
 - 신뢰도 기반 재분석 tool
-- TODO: DB 로직이 늘어나면 (이력 조회, 통계 등) `tools.py`에서 `db.py`로 분리
+- DB 초기화/커넥션은 `db.py`로 분리 완료. 이력 조회, 통계 기능 추가 시 `db.py`에 확장
 
 ## 시스템 프롬프트 설계 방향
 
