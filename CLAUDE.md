@@ -14,6 +14,13 @@ Pydantic AI + Claude 멀티모달 + FastAPI 기반.
 - Ruff (formatter + linter)
 - pytest + pytest-asyncio (테스트)
 
+## 모델 선택 전략
+
+- 기본 모델: `anthropic:claude-sonnet-4-5` (비용 효율)
+- 거북이 종 판별은 미묘한 외형 차이(붉은귀거북 vs 페닌슐라쿠터 등)를 구분해야 하므로 멀티모달 성능이 중요
+- Sonnet으로 시작하되, 정확도가 부족하면 `anthropic:claude-opus-4-5`로 업그레이드
+- 모델명은 `agent.py`에서 상수로 관리하여 교체가 용이하도록 한다
+
 ## 판별 대상
 
 - 종류: 붉은귀거북, 페닌슐라쿠터, 보석거북, 옐로우밸리, 핑크밸리
@@ -51,6 +58,13 @@ tests/
 
 `.env` 파일은 `.gitignore`에 포함. 절대 커밋하지 않는다.
 
+## 이미지 업로드 제약
+
+- 최대 파일 크기: 5MB (서버 레벨에서 검증)
+- 허용 형식: `image/jpeg`, `image/png`, `image/webp`
+- 크기 초과 또는 형식 불일치 시 즉시 거부 (Claude API 호출 전 차단)
+- FastAPI `UploadFile` → `await file.read()` → `BinaryContent(data=bytes, media_type=...)` 흐름
+
 ## 실행 방법
 
 ```bash
@@ -80,6 +94,16 @@ uv run uvicorn turtle_agent.server:app --host 0.0.0.0 --port 8000 --reload
 
 - 이미지 전처리 tool (크롭/리사이즈)
 - 신뢰도 기반 재분석 tool
+
+## 시스템 프롬프트 설계 방향
+
+시스템 프롬프트는 결과 품질의 핵심이다. 구현 시 아래 요소를 반드시 포함한다:
+
+- 판별 관점: 어떤 외형 특징(등갑 패턴, 머리 색상, 눈 뒤 반점, 배갑 형태 등)을 우선 관찰할지
+- 종별 구분 기준: 5종 각각의 핵심 식별 포인트 명시
+- 암수 구분 기준: 꼬리 길이/두께, 앞발 발톱 길이, 배갑 오목함 등
+- 저신뢰 대응: 확신도가 낮을 때 "불확실" 표기 + 이유 설명 (억지로 분류하지 않는다)
+- 프롬프트는 `agent.py`의 `instructions` 파라미터에 작성하며, 반복 테스트를 통해 다듬는다
 
 ## 코드 컨벤션
 
